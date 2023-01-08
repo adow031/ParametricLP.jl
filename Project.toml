@@ -1,0 +1,20 @@
+name = "ParametricLP"
+uuid = "8460d8c8-5267-486f-aef2-9a24dd859eab"
+authors = ["Anthony Downward"]
+version = "0.0.1"
+
+[deps]
+JuMP = "4076af6c-e467-56ae-b986-b466b2749572"
+MathOptInterface = "b8f27783-ece8-5eb3-8dc8-9495eed66fee"
+
+[compat]
+JuMP = "1"
+MathOptInterface = "1.11"
+julia = "1.6"
+
+[extras]
+HiGHS = "87dc4568-4c63-4d18-b0c0-bb2238e4078b"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["HiGHS", "Test"]
