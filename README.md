@@ -18,11 +18,11 @@ There is an example based on a two-node electricity dispatch problem provided in
 This package has not yet been extensively tested. If you encounter any problems when using this package,
 submit an issue.
 
-[build-img]: https://github.com/adow031/ParametricLP/workflows/CI/badge.svg?branch=main
-[build-url]: https://github.com/adow031/ParametricLP/actions?query=workflow%3ACI
+[build-img]: https://github.com/adow031/ParametricLP.jl/workflows/CI/badge.svg?branch=main
+[build-url]: https://github.com/adow031/ParametricLP.jl/actions?query=workflow%3ACI
 
-[codecov-img]: https://codecov.io/github/adow031/ParametricLP/coverage.svg?branch=main
-[codecov-url]: https://codecov.io/github/adow031/ParametricLP?branch=main
+[codecov-img]: https://codecov.io/github/adow031/ParametricLP.jl/coverage.svg?branch=main
+[codecov-url]: https://codecov.io/github/adow031/ParametricLP.jl?branch=main
 
 [docs-latest-img]: https://img.shields.io/badge/docs-latest-blue.svg
-[docs-latest-url]: https://adow031.github.io/JuliaPkgTemplate
+[docs-latest-url]: https://adow031.github.io/ParametricLP.jl
