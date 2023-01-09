@@ -16,12 +16,12 @@ function get_model(line_capacity::Float64)
     @constraint(model, x <= p[1])
     @constraint(model, y <= p[2])
 
-    @objective(model, Min, sum((i - (j - 1) / 2) * T[i, j] for i in 1:3, j in 1:2))
+    @objective(model, Min, sum((i + (j - 1) / 2) * T[i, j] for i in 1:3, j in 1:2))
 
     return model, p, [nd1, nd2]
 end
 
-model, p, cons = get_model(1.0)
+model, p, cons = get_model(0.5)
 
 box = ((0.0, 4.0), (0.0, 4.0))
 

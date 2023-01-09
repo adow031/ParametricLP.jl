@@ -1,7 +1,7 @@
 name = "ParametricLP"
 uuid = "8460d8c8-5267-486f-aef2-9a24dd859eab"
 authors = ["Anthony Downward"]
-version = "0.0.1"
+version = "0.0.2"
 
 [deps]
 JuMP = "4076af6c-e467-56ae-b986-b466b2749572"

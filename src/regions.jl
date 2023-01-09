@@ -23,7 +23,6 @@ function find_region(
 
     reverselookup = Dict{Int,VariableRef}()
     bounds = Dict{Int,Tuple{Float64,Float64}}()
-    constraint_sets = Dict{Int,Symbol}()
     newcons = ConstraintRef[]
     for index in eachindex(sfm.bounds)
         reverselookup[index] = JuMP.constraint_object(sfm.bounds[index]).func
@@ -35,7 +34,7 @@ function find_region(
         if sfb.bounds[i] != MathOptInterface.BASIC && reverselookup[i] ∉ parameters
             var = reverselookup[i]
             lb = has_lower_bound(var) ? lower_bound(var) : -Inf
-            ub = has_upper_bound(var) ? upper_bound(var) : -Inf
+            ub = has_upper_bound(var) ? upper_bound(var) : Inf
             bounds[i] = (lb, ub)
 
             fix(var, solution[var], force = true)
@@ -47,10 +46,8 @@ function find_region(
             constr_set = MOI.get(model, MOI.ConstraintSet(), sfm.constraints[i])
             rhs = nothing
             if typeof(constr_set) <: MOI.GreaterThan
-                constraint_sets[i] = :greater
                 rhs = constr_set.lower
             elseif typeof(constr_set) <: MOI.LessThan
-                constraint_sets[i] = :less
                 rhs = constr_set.upper
             end
 
