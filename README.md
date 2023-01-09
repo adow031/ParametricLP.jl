@@ -4,9 +4,10 @@
 
 # ParametricLP.jl
 
-This package utilises JuMP to define a two-dimensional parametric of the dual solution of a linear programme,
+This package utilises JuMP to define a two-dimensional parametric representation of the dual solution of a linear programme,
 as a function of the two right-hand side values. If you use this package for academic work, please cite this paper:
-Habibian M. et al. Co-optimization of demand response and interruptible load reserve offers for a price-making major
+
+M. Habibian et al. Co-optimization of demand response and interruptible load reserve offers for a price-making major
 consumer. Energy Systems, 11, pp. 45-71, (2020).
 
 ## Example
