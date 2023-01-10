@@ -95,33 +95,41 @@ function find_region(
         end
     end
     unique!(fix_minus_zero, corners)
-    c =
-        (
-            sum(corners[i][1] for i in eachindex(corners)),
-            sum(corners[i][2] for i in eachindex(corners)),
-        ) ./ length(corners)
-    sort!(
-        corners,
-        lt = (x, y) -> atan(x[1] - c[1], x[2] - c[2]) < atan(y[1] - c[1], y[2] - c[2]),
-    )
+    if length(corners) == 1
+        seeds = [
+            (corners[1][1] + ϵ * i[1], corners[1][2] + ϵ * i[2]) for
+            i in [(-1, -1), (-1, 1), (1, -1), (1, 1)]
+        ]
+    else
+        c =
+            (
+                sum(corners[i][1] for i in eachindex(corners)),
+                sum(corners[i][2] for i in eachindex(corners)),
+            ) ./ length(corners)
+        sort!(
+            corners,
+            lt = (x, y) -> atan(x[1] - c[1], x[2] - c[2]) < atan(y[1] - c[1], y[2] - c[2]),
+        )
 
-    offsets = [
-        (
-            (corners[i][2] - corners[i%length(corners)+1][2]),
-            (corners[i%length(corners)+1][1] - corners[i][1]),
-        ) .* (
-            ϵ / sqrt(
-                (corners[i][1] - corners[i%length(corners)+1][1])^2 +
-                (corners[i%length(corners)+1][2] - corners[i][2])^2,
-            )
-        ) for i in eachindex(corners)
-    ]
-    seeds = [
-        (
-            corners[i][1] + corners[i%length(corners)+1][1] + 2 * offsets[i][1],
-            corners[i][2] + corners[i%length(corners)+1][2] + 2 * offsets[i][2],
-        ) ./ 2 for i in eachindex(corners)
-    ]
+        offsets = [
+            (
+                (corners[i][2] - corners[i%length(corners)+1][2]),
+                (corners[i%length(corners)+1][1] - corners[i][1]),
+            ) .* (
+                ϵ / sqrt(
+                    (corners[i][1] - corners[i%length(corners)+1][1])^2 +
+                    (corners[i%length(corners)+1][2] - corners[i][2])^2,
+                )
+            ) for i in eachindex(corners)
+        ]
+
+        seeds = [
+            (
+                corners[i][1] + corners[i%length(corners)+1][1] + 2 * offsets[i][1],
+                corners[i][2] + corners[i%length(corners)+1][2] + 2 * offsets[i][2],
+            ) ./ 2 for i in eachindex(corners)
+        ]
+    end
 
     for c in newcons
         delete(model, c)
@@ -182,6 +190,7 @@ function find_regions(
         (box[1][2], box[2][2]),
         (box[1][1], box[2][2]),
     ]
+
     while length(seeds_list) > 0
         seed = pop!(seeds_list)
         duplicate =
